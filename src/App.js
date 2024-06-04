@@ -1,24 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import React from "react";
+import "./App.css";
+import ShowEmployee from "./components/ShowEmployee";
+import Container from "@mui/material/Container";
+import { Box } from "@mui/material";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <React.Fragment>
+      <Container>
+        <Box sx={{ bgcolor: "#cfe8fc", height: "100vh" }}>
+          <div className="App">
+            <h2>Aparajit Chatterjee</h2>
+            <ShowEmployee />
+          </div>
+        </Box>
+      </Container>
+    </React.Fragment>
   );
 }
 
