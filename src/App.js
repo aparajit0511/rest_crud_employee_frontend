@@ -4,6 +4,7 @@ import "./App.css";
 import ShowEmployee from "./components/ShowEmployee";
 import Container from "@mui/material/Container";
 import { Box } from "@mui/material";
+import AddEmployee from "./components/AddEmployee";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
           <div className="App">
             <h2>Aparajit Chatterjee</h2>
             <ShowEmployee />
+            <AddEmployee />
           </div>
         </Box>
       </Container>
