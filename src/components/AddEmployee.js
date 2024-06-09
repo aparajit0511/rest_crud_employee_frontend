@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Box, ThemeProvider } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import { Link } from "react-router-dom";
 
 const AddEmployee = () => {
   const [firstName, setFirstName] = useState("");
@@ -68,9 +69,16 @@ const AddEmployee = () => {
             onChange={onEmailHandler}
           />
         </div>
-        <Button variant="contained" color="success" onClick={onClickHandler}>
-          Submit
-        </Button>
+        <div>
+          <Button variant="contained" color="success" onClick={onClickHandler}>
+            Submit
+          </Button>
+          <Link to="/api/employees">
+            <Button variant="contained" color="secondary">
+              Go Back
+            </Button>
+          </Link>
+        </div>
       </Box>
     </div>
   );

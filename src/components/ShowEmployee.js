@@ -1,9 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { DataGrid } from "@mui/x-data-grid";
+import Button from "@mui/material/Button";
+import { AppDataContext } from "../App";
 
-const ShowEmployee = () => {
+const ShowEmployee = ({ onEmployeeData }) => {
   const [employeeData, setemployeeData] = useState("");
+  // const { employeeData, setEmployeeData } = useContext(AppDataContext);
   const [Rows, setRows] = useState([]);
+  const onEmployeeDataRef = useRef(onEmployeeData);
+
+  useEffect(() => {
+    onEmployeeDataRef.current = onEmployeeData;
+  }, [onEmployeeData]);
 
   useEffect(() => {
     async function callGetEmployees() {
@@ -12,9 +20,13 @@ const ShowEmployee = () => {
       );
       console.log("data", data);
       setemployeeData(data);
+      // setEmployeeData(data);
     }
     callGetEmployees();
   }, []);
+
+  // const UpdatedRows = {};
+  // onEmployeeData = { UpdatedRows };
 
   useEffect(() => {
     if (employeeData && employeeData.length > 0) {
@@ -26,6 +38,7 @@ const ShowEmployee = () => {
       }));
 
       setRows(UpdatedRows);
+      onEmployeeDataRef.current(UpdatedRows);
     }
   }, [employeeData]);
 
@@ -34,6 +47,23 @@ const ShowEmployee = () => {
     { field: "firstName", headerName: "First name", width: 230 },
     { field: "lastName", headerName: "Last name", width: 230 },
     { field: "email", headerName: "Email", width: 330 },
+    {
+      field: "Update",
+      width: 200,
+      renderCell: (cellValues) => {
+        return (
+          <Button
+            variant="contained"
+            color="secondary"
+            // onClick={(event) => {
+            //   handleSellClick(event, cellValues);
+            // }}
+          >
+            Update
+          </Button>
+        );
+      },
+    },
   ];
 
   return (
