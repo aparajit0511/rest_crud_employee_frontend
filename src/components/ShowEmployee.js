@@ -1,17 +1,18 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import Button from "@mui/material/Button";
-import { AppDataContext } from "../App";
+import { Link } from "react-router-dom";
+import { EmployeeDataContext } from "../ContextAPI/EmployeeContext";
 
 const ShowEmployee = ({ onEmployeeData }) => {
   const [employeeData, setemployeeData] = useState("");
-  // const { employeeData, setEmployeeData } = useContext(AppDataContext);
   const [Rows, setRows] = useState([]);
-  const onEmployeeDataRef = useRef(onEmployeeData);
 
-  useEffect(() => {
-    onEmployeeDataRef.current = onEmployeeData;
-  }, [onEmployeeData]);
+  const { setUpdateData } = useContext(EmployeeDataContext);
+
+  const handleUpdateClick = (event, cellValues) => {
+    setUpdateData(cellValues.row);
+  };
 
   useEffect(() => {
     async function callGetEmployees() {
@@ -25,9 +26,6 @@ const ShowEmployee = ({ onEmployeeData }) => {
     callGetEmployees();
   }, []);
 
-  // const UpdatedRows = {};
-  // onEmployeeData = { UpdatedRows };
-
   useEffect(() => {
     if (employeeData && employeeData.length > 0) {
       const UpdatedRows = employeeData.map((result, index) => ({
@@ -38,7 +36,6 @@ const ShowEmployee = ({ onEmployeeData }) => {
       }));
 
       setRows(UpdatedRows);
-      onEmployeeDataRef.current(UpdatedRows);
     }
   }, [employeeData]);
 
@@ -52,15 +49,17 @@ const ShowEmployee = ({ onEmployeeData }) => {
       width: 200,
       renderCell: (cellValues) => {
         return (
-          <Button
-            variant="contained"
-            color="secondary"
-            // onClick={(event) => {
-            //   handleSellClick(event, cellValues);
-            // }}
-          >
-            Update
-          </Button>
+          <Link to="/api/employessAdd">
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={(event) => {
+                handleUpdateClick(event, cellValues);
+              }}
+            >
+              Update
+            </Button>
+          </Link>
         );
       },
     },

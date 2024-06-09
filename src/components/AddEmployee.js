@@ -1,10 +1,15 @@
-import React, { useState } from "react";
-import { Box, ThemeProvider } from "@mui/material";
+import React, { useState, useContext } from "react";
+import { Box } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
+import { EmployeeDataContext } from "../ContextAPI/EmployeeContext";
 
 const AddEmployee = () => {
+  const { updateData } = useContext(EmployeeDataContext);
+
+  console.log("Show Update Data", updateData);
+
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");

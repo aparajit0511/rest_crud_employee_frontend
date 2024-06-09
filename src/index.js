@@ -5,6 +5,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import AddEmployee from "./components/AddEmployee";
+import EmployeeContext from "./ContextAPI/EmployeeContext";
 
 const router = createBrowserRouter([
   { path: "/api/employees", element: <App /> },
@@ -14,7 +15,10 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <EmployeeContext>
+      <RouterProvider router={router} />
+    </EmployeeContext>
+
     {/* <App /> */}
   </React.StrictMode>
 );
