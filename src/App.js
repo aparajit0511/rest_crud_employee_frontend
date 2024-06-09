@@ -1,10 +1,9 @@
-import logo from "./logo.svg";
 import React from "react";
 import "./App.css";
 import ShowEmployee from "./components/ShowEmployee";
 import Container from "@mui/material/Container";
-import { Box } from "@mui/material";
-import AddEmployee from "./components/AddEmployee";
+import { Box, Button } from "@mui/material";
+import { Link } from "react-router-dom";
 
 function App() {
   return (
@@ -14,7 +13,11 @@ function App() {
           <div className="App">
             <h2>Aparajit Chatterjee</h2>
             <ShowEmployee />
-            <AddEmployee />
+            <Link to="/api/employessAdd">
+              <Button variant="contained" color="success">
+                Add Employee
+              </Button>
+            </Link>
           </div>
         </Box>
       </Container>

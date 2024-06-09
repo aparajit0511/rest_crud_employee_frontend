@@ -1,9 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { DataGrid } from "@mui/x-data-grid";
+import Button from "@mui/material/Button";
+import { Link } from "react-router-dom";
+import { EmployeeDataContext } from "../ContextAPI/EmployeeContext";
 
-const ShowEmployee = () => {
+const ShowEmployee = ({ onEmployeeData }) => {
   const [employeeData, setemployeeData] = useState("");
   const [Rows, setRows] = useState([]);
+
+  const { setUpdateData } = useContext(EmployeeDataContext);
+
+  const handleUpdateClick = (event, cellValues) => {
+    setUpdateData(cellValues.row);
+  };
 
   useEffect(() => {
     async function callGetEmployees() {
@@ -12,6 +21,7 @@ const ShowEmployee = () => {
       );
       console.log("data", data);
       setemployeeData(data);
+      // setEmployeeData(data);
     }
     callGetEmployees();
   }, []);
@@ -34,6 +44,25 @@ const ShowEmployee = () => {
     { field: "firstName", headerName: "First name", width: 230 },
     { field: "lastName", headerName: "Last name", width: 230 },
     { field: "email", headerName: "Email", width: 330 },
+    {
+      field: "Update",
+      width: 200,
+      renderCell: (cellValues) => {
+        return (
+          <Link to="/api/employessAdd">
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={(event) => {
+                handleUpdateClick(event, cellValues);
+              }}
+            >
+              Update
+            </Button>
+          </Link>
+        );
+      },
+    },
   ];
 
   return (

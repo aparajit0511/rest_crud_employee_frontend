@@ -1,13 +1,25 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import AddEmployee from "./components/AddEmployee";
+import EmployeeContext from "./ContextAPI/EmployeeContext";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const router = createBrowserRouter([
+  { path: "/api/employees", element: <App /> },
+  { path: "/api/employessAdd", element: <AddEmployee /> },
+]);
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App />
+    <EmployeeContext>
+      <RouterProvider router={router} />
+    </EmployeeContext>
+
+    {/* <App /> */}
   </React.StrictMode>
 );
 
