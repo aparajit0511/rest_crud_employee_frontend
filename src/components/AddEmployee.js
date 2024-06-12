@@ -2,11 +2,12 @@ import React, { useState, useContext } from "react";
 import { Box } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { EmployeeDataContext } from "../ContextAPI/EmployeeContext";
 
 const AddEmployee = () => {
   const { updateData } = useContext(EmployeeDataContext);
+  const navigate = useNavigate();
 
   console.log("Show Update Data", updateData);
 
@@ -37,6 +38,10 @@ const AddEmployee = () => {
     }).then(() => {
       console.log("New Employee added");
     });
+
+    setTimeout(() => {
+      navigate(`/api/employees`);
+    }, 3000);
   };
 
   return (

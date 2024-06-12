@@ -2,12 +2,14 @@ import React, { useState, useContext } from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { Box } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { EmployeeDataContext } from "../ContextAPI/EmployeeContext";
 
 function UpdateEmployee() {
   const { updateData } = useContext(EmployeeDataContext);
   const { result_id, firstName, lastName, email } = updateData;
+
+  const navigate = useNavigate();
 
   const [UpdatedName, setUpdatedName] = useState(firstName);
   const [UpdatedTitle, setUpdatedTitle] = useState(lastName);
@@ -58,6 +60,10 @@ function UpdateEmployee() {
     }).then(() => {
       console.log("Updated Employee");
     });
+
+    setTimeout(() => {
+      navigate(`/api/employees`);
+    }, 2000);
   };
 
   return (
