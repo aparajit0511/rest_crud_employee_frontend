@@ -29,7 +29,7 @@ const AddEmployee = () => {
   const onClickHandler = (event) => {
     event.preventDefault();
     const employee = { firstName, lastName, email };
-    console.log(employee);
+    console.log(JSON.stringify(employee));
     fetch("http://localhost:8080/api/employees", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
