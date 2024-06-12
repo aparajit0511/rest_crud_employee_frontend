@@ -6,10 +6,12 @@ import reportWebVitals from "./reportWebVitals";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import AddEmployee from "./components/AddEmployee";
 import EmployeeContext from "./ContextAPI/EmployeeContext";
+import UpdateEmployee from "./components/UpdateEmployee";
 
 const router = createBrowserRouter([
   { path: "/api/employees", element: <App /> },
   { path: "/api/employessAdd", element: <AddEmployee /> },
+  { path: "/api/employeesUpdate", element: <UpdateEmployee /> },
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

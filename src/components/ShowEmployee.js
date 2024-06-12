@@ -4,7 +4,7 @@ import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 import { EmployeeDataContext } from "../ContextAPI/EmployeeContext";
 
-const ShowEmployee = ({ onEmployeeData }) => {
+const ShowEmployee = () => {
   const [employeeData, setemployeeData] = useState("");
   const [Rows, setRows] = useState([]);
 
@@ -29,6 +29,7 @@ const ShowEmployee = ({ onEmployeeData }) => {
   useEffect(() => {
     if (employeeData && employeeData.length > 0) {
       const UpdatedRows = employeeData.map((result, index) => ({
+        result_id: result.id,
         id: index + 1,
         firstName: result.firstName,
         lastName: result.lastName,
@@ -49,7 +50,7 @@ const ShowEmployee = ({ onEmployeeData }) => {
       width: 200,
       renderCell: (cellValues) => {
         return (
-          <Link to="/api/employessAdd">
+          <Link to="/api/employeesUpdate">
             <Button
               variant="contained"
               color="secondary"
