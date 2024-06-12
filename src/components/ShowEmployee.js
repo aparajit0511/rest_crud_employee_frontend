@@ -1,17 +1,34 @@
 import React, { useEffect, useState, useContext } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import Button from "@mui/material/Button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { EmployeeDataContext } from "../ContextAPI/EmployeeContext";
 
 const ShowEmployee = () => {
   const [employeeData, setemployeeData] = useState("");
   const [Rows, setRows] = useState([]);
+  const navigate = useNavigate();
 
   const { setUpdateData } = useContext(EmployeeDataContext);
 
   const handleUpdateClick = (event, cellValues) => {
     setUpdateData(cellValues.row);
+  };
+
+  const handleDeleteClick = (event, cellValues) => {
+    // event.preventDefault();
+    const id_ = cellValues.row.result_id;
+    console.log("Delete data ", id_);
+    fetch(`http://localhost:8080/api/employees/${id_}`, {
+      method: "DELETE",
+    }).then(() => {
+      console.log("Employee delete");
+    });
+
+    // both works
+
+    navigate(0);
+    // window.location.reload();
   };
 
   useEffect(() => {
@@ -61,6 +78,23 @@ const ShowEmployee = () => {
               Update
             </Button>
           </Link>
+        );
+      },
+    },
+    {
+      field: "Delete",
+      width: 200,
+      renderCell: (cellValues) => {
+        return (
+          <Button
+            variant="contained"
+            color="success"
+            onClick={(event) => {
+              handleDeleteClick(event, cellValues);
+            }}
+          >
+            Delete
+          </Button>
         );
       },
     },
